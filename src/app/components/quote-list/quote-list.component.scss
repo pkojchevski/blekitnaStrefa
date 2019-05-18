@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+@media all and (min-width: 768px) {
+  tr {
+    td {
+      vertical-align: middle !important;
+    }
+
+    span {
+      &:not([class]) {
+        padding: 1rem 1rem;
+      }
+    }
+  }
+}
+
+span.editable {
+  border: 1px solid #e3f2fd;
+  display: inline-block;
+  width: 100%
+}
+
+
+.table {
+  align-self: center;
+}
+
+.table-add {
+  // border: 1px solid red;
+}
+
+app-input-search {
+  z-index: 999;
+}

@@ -1,1 +1,126 @@
 /* You can add global styles to this file, and also import other style files */
+// table {
+//   margin: 0 !important;
+//   padding: 0 !important;
+// }
+.btn {
+  padding: 5px 8px !important;
+}
+
+$purple : #512DA8;
+$blue : #1976D2;
+$l_orange : #FBC02D;
+$brick : #FF5722;
+
+@mixin buttonBG($bg) {
+  border: 2px solid $bg;
+  color: $bg;
+
+  &:hover {
+    background-color: $bg;
+    transition: all 0.3s ease-in-out;
+  }
+}
+
+.skewBtn {
+  outline: none;
+  cursor: pointer;
+  background: none;
+  transition: .5s;
+  border-radius: 5px;
+  font-family: "Lato", sans-serif;
+
+  &:hover {
+    border: none;
+    color: white;
+    font-size: 28px;
+    transform: scale(1.1);
+  }
+}
+
+.brick {
+  @include buttonBG($brick);
+}
+
+.blue {
+  @include buttonBG($blue);
+}
+
+@-webkit-keyframes rubberBand {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes rubberBand {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.rubberBand {
+  -webkit-animation: rubberBand 1s ease-out;
+  animation: rubberBand 1s ease-out;
+}

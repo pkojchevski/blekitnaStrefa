@@ -1,0 +1,91 @@
+<div class="container">
+  <div id="table" class="table-editable">
+    <div class="row">
+      <!-- <div class="col-md-8fire mx-auto">
+        <div class="md-form">
+          <input type="text" [(ngModel)]="searchText" (keyup)="onkeyup($event)" class="form-control" id="search"
+            mdbInput placeholder="Search...">
+          <label for="search"></label>
+        </div>
+      </div> -->
+    </div>
+    <table mdTable class="z-depth-1 table table-bordered table-responsive-md text-center w-auto">
+      <caption>
+        {{(quote$|async)?.name}}
+        <!-- <div class="table-add mb-3 mr-2 mt-2">
+                  <a class="teal-text" (click)="addNewRowInTable()">
+                    <mdb-icon fas icon="plus-circle" size="2x"></mdb-icon>
+                  </a>
+                </div> -->
+      </caption>
+      <thead class="unique-color white-text font-weight-bold font-italic">
+        <tr>
+          <th class="text-center align-middle">Produkt</th>
+          <th class="text-center align-middle">Iłość</th>
+          <th class="text-center align-middle">Cena netto</th>
+          <th class="text-center align-middle">VAT</th>
+          <th class="text-center align-middle">Suma netto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let quoteRow of quoteRows$|async; let i = index">
+          <!-- <td (click)="autocompleteOn[i]='true'" class="align-middle text-center">
+            <div class="autocomplete">
+              <div class="autocomplete-p" *ngIf="!autocompleteOn[i]" class="align-middle text-center">
+                {{quoteRow?.product.name}}
+              </div>
+              <input #name class="autocomplete-input" type="text" (keydown)="searchProducts($event)"
+                [(ngModel)]="productName" *ngIf="autocompleteOn[i]" autofocus>
+              <div class="autocomplete-list" *ngIf="autocompleteOn[i]">
+                <div *ngFor="let product of products$|async, let i = index"
+                  (click)="chooseProduct(product, quoteRow, i)">
+                  {{product.name}}
+                </div>
+              </div>
+            </div>
+          </td> -->
+          <td class="product-name">
+            {{quoteRow?.product.name}}
+          </td>
+          <td class="text-center">
+            {{quoteRow?.quantity}}
+          </td>
+          <td>
+            {{quoteRow.income_netto}}
+          </td>
+          <td>
+            {{quoteRow.product.pc_vat}}%
+          </td>
+          <td>
+            {{quoteRow.income_total_netto}}
+          </td>
+          <!-- <td>
+            <span class="table-remove">
+              <button type="button" mdbBtn color="danger" rounded="true" outline="true" size="sm" class="my-0"
+                (click)="removeQuoteRow(quoteRow.uid)">
+                <mdb-icon far icon="trash-alt" size="2x"></mdb-icon>
+              </button>
+            </span>
+          </td> -->
+        </tr>
+        <tr class="font-weight-bold font-italic">
+          <td colspan="2"></td>
+          <td colspan="2" class="primary-color white-text">RAZEM</td>
+          <td class="primary-color white-text">{{(quote$|async)?.income_total_netto | number : '1.2'}}</td>
+        <tr>
+        <tr class="font-weight-bold font-italic">
+          <td colspan="2"></td>
+          <td class="primary-color white-text">RABAT</td>
+          <td class="primary-color white-text">{{(quote$|async)?.rabat | number : '1.2'}}</td>
+          <td class="primary-color white-text">{{(quote$|async)?.rabatValue | number : '1.2'}}</td>
+        <tr>
+        <tr class="font-weight-bold font-italic">
+          <td colspan="2"></td>
+          <td colspan="2" class="primary-color white-text">OFERTA</td>
+          <td class="primary-color white-text">{{(quote$|async)?.income_total_netto  | number : '1.2'}} -
+            {{(quote$|async)?.rabatValue | number : '1.2'}}</td>
+        <tr>
+      </tbody>
+    </table>
+  </div>
+</div>

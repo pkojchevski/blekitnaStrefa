@@ -1,0 +1,101 @@
+<div class="container">
+  <div id="table" class="table-editable">
+    <div class="row mt-5">
+      <div class="col-md-8fire mx-auto">
+        <div class="md-form">
+          <input type="text" (keyup)="onkeyup($event)" [(ngModel)]="searchText" class="form-control" id="search"
+            placeholder="Szukaj" mdbInput>
+          <label for="search"></label>
+        </div>
+      </div>
+    </div>
+    <table mdTable class="z-depth-1 table table-bordered table-responsive-md text-center w-auto table-sm"
+      *ngIf="quotes$|async as quotes">
+      <!-- <caption>
+        Klienci
+        <div class="table-add mb-3 mr-2 mt-2">
+          <a class="teal-text" (click)="addNewRowInTable()">
+            <mdb-icon fas icon="plus-circle" size="2x"></mdb-icon>
+          </a>
+        </div>
+      </caption> -->
+      <thead class="unique-color white-text font-weight-bold font-italic">
+        <tr>
+          <th rowspan="2">Oferta</th>
+          <th rowspan="2">Nazwa Klienta</th>
+          <th colspan="4">Adresa</th>
+          <th class="text-center align-middle" colspan="4">Adres do korespondencji</th>
+          <th class="text-center align-middle" rowspan="2">e-mail</th>
+          <th class="text-center align-middle" rowspan="2">Osoba kontaktowa</th>
+          <th class="text-center align-middle" rowspan="2">Uwagi</th>
+          <th class="text-center align-middle" rowspan="2">Ostatni kont.tel.</th>
+          <th class="text-center align-middle" rowspan="2">Ostatni kont.mail</th>
+          <th class="text-center align-middle" rowspan="2">Sugerowany kontakt</th>
+        </tr>
+        <tr>
+          <th class="text-center">Ulica</th>
+          <th class="text-center">Kod</th>
+          <th class="text-center">Miasto</th>
+          <th class="text-center">Kraj</th>
+          <th class="text-center">Ulica</th>
+          <th class="text-center">Kod</th>
+          <th class="text-center">Miasto</th>
+          <th class="text-center">Kraj</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let quote of quotes; let i = index">
+          <td class="text-center align-middle">
+            {{quote?.name}}
+          </td>
+          <td class="text-center align-middle">
+            {{quote?.customer?.name}}
+          </td>
+          <td>
+            {{quote?.customer?.address?.str}}
+          </td>
+          <td>
+            {{quote?.customer?.address?.code}}
+          </td>
+          <td>
+            {{quote?.customer?.address?.city}}
+          </td>
+          <td>
+            {{quote?.customer?.address?.region}}
+          </td>
+          <td>
+            {{quote?.customer?.coresspondingAddress?.str}}
+          </td>
+          <td>
+            {{quote?.customer?.coresspondingAddress?.code}}
+          </td>
+          <td>
+            {{quote?.customer?.coresspondingAddress?.city}}
+          </td>
+          <td>
+            {{quote?.customer?.coresspondingAddress?.region}}
+          </td>
+          <td>
+            {{quote?.customer?.email}}
+          </td>
+          <td>
+            {{quote?.customer?.contactName}}
+          </td>
+          <td>
+            {{quote?.customer?.contactData?.comments}}
+          </td>
+          <td>
+            {{quote?.customer?.contactData?.lastPhoneContactDate}}
+          </td>
+          <td>
+            {{quote?.customer?.contactData?.lastMailContactDate}}
+          </td>
+          <td>
+            {{quote?.customer?.contactData?.nextContactDate}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- Editable table -->

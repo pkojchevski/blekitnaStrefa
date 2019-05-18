@@ -1,0 +1,8 @@
+<div class="autocomplete align-middle text-center">
+  <input #input class="autocomplete-input" type="text" [(ngModel)]="inputText" autofocus>
+  <div class="autocomplete-list" *ngIf="typing">
+    <div class="autocomplete-list-item" *ngFor="let obj of obs$|async, let i = index" (click)="onClick(obj, i)">
+      {{obj?.name}}
+    </div>
+  </div>
+</div>

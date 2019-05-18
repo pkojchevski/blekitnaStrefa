@@ -1,0 +1,136 @@
+<div class="container">
+  <div id="table" class="table-editable mb-0">
+    <div class="row mt-5">
+      <div class="col-md-8fire mx-auto">
+        <div class="md-form">
+          <input type="text" class="form-control" (keyup)="searchQuotes($event)" id="search" mdbInput
+            [(ngModel)]="searchText" placeholder="Szukaj">
+        </div>
+      </div>
+    </div>
+
+    <table mdTable small="true" class="z-depth-1 table table-bordered table-responsive-md text-center w-auto table-sm"
+      *ngIf="(quoteList$|async) as quoteList">
+      <caption>
+        Wycennik Lista
+        <div class="table-add mb-3 mr-2 mt-2">
+          <a class="teal-text" (click)="addNewRowInTable()">
+            <mdb-icon fas icon="plus-circle" size="2x"></mdb-icon>
+          </a>
+        </div>
+      </caption>
+      <thead class="unique-color white-text" style="font-size:1rem">
+        <tr>
+          <th class="text-center align-middle" rowspan="2">Nazwa</th>
+          <th class="text-center align-middle" rowspan="2">Klient</th>
+          <th>Zakup</th>
+          <th colspan="3">Rynkowa</th>
+          <th class="text-center align-middle" colspan="3">Przychód</th>
+          <th class="text-center align-middle" rowspan="2">Wartość VAT</th>
+          <th class="text-center align-middle" rowspan="2">Podatek dochodowy</th>
+          <th class="text-center align-middle" rowspan="2">Dochód</th>
+          <th class="text-center align-middle" rowspan="2">Rabat</th>
+          <th class="text-center align-middle" rowspan="2">Marża</th>
+          <th class="text-center align-middle" rowspan="2">Data</th>
+          <th class="text-center align-middle" rowspan="2">Otwórz Wycennik</th>
+          <th class="text-center align-middle" rowspan="2">Otwórz Tabelki</th>
+          <th class="text-center align-middle" rowspan="2">Usuń</th>
+          <th class="text-center align-middle" rowspan="2">Kopiuj</th>
+        </tr>
+        <tr>
+          <th class="text-center">Suma netto</th>
+          <th class="text-center">netto</th>
+          <th class="text-center">Suma Netto</th>
+          <th class="text-center">Suma Brutto</th>
+          <th class="text-center">Netto</th>
+          <th class="text-center">Suma Netto</th>
+          <th class="text-center">Suma Brutto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let quote of quoteList; let i = index">
+          <td>
+            <span contenteditable="true" (blur)="addNameToQuote($event, quote)"
+              class="text-center align-middle editable">
+              {{quote?.name}}
+            </span>
+          </td>
+          <td (click)="setAutocomplete(i)" class="align-middle text-center">
+            <span *ngIf="!autocompleteOn[i]" class="align-middle text-center autocomplete-p editable">
+              {{quote.customer.name}}
+            </span>
+            <app-input-search *ngIf="autocompleteOn[i]" [obs$]="customers$" (inputKeyDown)="searchCustomers($event)"
+              (listClicked)="chooseCustomer($event, quote, i)">
+            </app-input-search>
+          </td>
+          <td class="align-middle">
+            {{quote?.mc_total_netto | number : '1.2'}}
+          </td>
+          <td class="align-middle">
+            {{quote?.pc_netto | number : '1.2'}}
+          </td>
+          <td class="align-middle">
+            {{quote?.pc_total_netto | number : '1.2'}}
+          </td>
+          <td class="align-middle">
+            {{quote?.pc_total_brutto | number : '1.2'}}
+          </td>
+          <td class="align-middle">
+            {{quote?.income_netto | number : '1.2'}}
+          </td>
+          <td class="align-middle">
+            {{quote?.income_total_netto | number : '1.2'}}
+          </td>
+          <td class="align-middle">
+            {{quote?.income_total_brutto | number : '1.2'}}
+          </td>
+          <td class="align-middle">
+            {{quote?.vat | number : '1.2'}}
+          </td>
+          <td class="align-middle">
+            {{quote?.podatek | number : '1.2'}}
+          </td>
+          <td class="align-middle">
+            {{quote?.income | number : '1.2'}}
+          </td>
+          <td class="align-middle">
+            {{quote?.rabat | number : '1.2'}}
+          </td>
+          <td class="align-middle">
+            {{quote?.marza | number : '1.2'}}
+          </td>
+          <td class="align-middle">
+            {{quote?.date?.toDate() | date: 'short'}}
+          </td>
+          <td class="align-middle">
+            <button mdbBtn type="button" color="default" rounded="true" outline="true" mdbWavesEffect size="sm"
+              class="my-0" routerLink="/quote/{{quote.uid}}">
+              <i class="fas fa-folder-open fa-2x" size="2x"></i>
+            </button>
+          </td>
+          <td class="align-middle">
+            <button mdbBtn type="button" color="default" rounded="true" outline="true" size="sm" class="my-0"
+              mdbWavesEffect routerLink="/quoteShort/{{quote.uid}}">
+              <i class="fas fa-folder-open fa-2x" size="2x"></i>
+            </button>
+          </td>
+          <td class="align-middle">
+            <button type="button" mdbBtn color="danger" rounded="true" outline="true" size="sm" class="my-0"
+              (click)="deleteQuote(quote)">
+              <i class="far fa-trash-alt fa-2x"></i>
+            </button>
+          </td>
+          <td class="align-middle">
+            <button type="button" mdbBtn color="default" rounded="true" outline="true" size="sm" class="my-0"
+              (click)="copyQuote(quote)">
+              <i class="far fa-copy fa-2x"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- </div>
+</div> -->
+<!-- Editable table -->

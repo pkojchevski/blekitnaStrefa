@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 8rem;
+}
+
+@media all and (min-width: 768px) {
+  tr {
+    td {
+      vertical-align: middle !important;
+    }
+
+    span {
+      &:not([class]) {
+        padding: 1rem 1rem;
+      }
+    }
+  }
+}
+
+.product-name {
+  width: 20rem;
+  text-align: left;
+}
+
+
+.table {
+  align-self: center;
+}
+
+.table-add {
+  // border: 1px solid red;
+}
